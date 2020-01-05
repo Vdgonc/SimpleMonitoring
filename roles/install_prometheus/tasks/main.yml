@@ -1,0 +1,4 @@
+---
+- include: pre_tasks.yml
+- include: install.yml
+- include: configure.yml

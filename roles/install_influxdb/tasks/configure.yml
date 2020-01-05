@@ -1,0 +1,31 @@
+- name: Enable influxdb.service
+  systemd:
+    name: influxd
+    enabled: yes
+    
+
+- name: Start influxdb.service
+  systemd:
+    name: influxd
+    state: started
+    daemon_reload: yes
+
+- name: Criando database telegraf 
+  command: 'influx -execute "CREATE DATABASE telegraf"'
+    
+- name: Criando usuario
+  command: influx -execute "CREATE USER test WITH PASSWORD 'test' WITH ALL PRIVILEGES"
+
+- name: Copiando arquivo de configuração
+  template:
+    src: influxdb.conf.j2
+    dest: /etc/influxdb/influxdb.conf
+    owner: influxdb
+    group: influxdb
+    mode: "0755"
+
+- name: Restart influxdb.service
+  systemd:
+    name: influxd
+    state: restarted
+

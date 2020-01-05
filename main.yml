@@ -1,0 +1,21 @@
+- hosts: monitoring
+  user: ubuntu
+  become: yes
+  gather_facts: no
+  pre_tasks:
+    - name: "Atualizando repositorio"
+      raw: 'apt update'
+    - name: "Instalando python"
+      raw: 'apt install -y python'
+    - name: "Instalando aptitude"
+      raw: 'apt install -y aptitude'
+    - name: "Instalando python-apt"
+      raw: 'apt install -y python-apt'
+
+- hosts: monitoring
+  user: ubuntu
+  become: yes
+  roles:
+    - install_prometheus
+    - install_influxdb
+    - install_grafana

@@ -1,0 +1,19 @@
+- name: Adicionando key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Adicionado repo
+  apt_repository:
+    repo: "deb https://repos.influxdata.com/ubuntu bionic stable"
+    state: present
+
+- name: Fazendo update
+  apt:
+    update_cache: yes
+
+- name: Instalando InfluxDB
+  apt:
+    name: influxdb
+    state: latest
+

@@ -1,0 +1,17 @@
+- name: Movendo binario prometheus
+  file:
+    src: "/opt/prometheus/prometheus"
+    dest: "/usr/local/bin/prometheus"
+    mode: "0777"
+    owner: prometheus
+    group: prometheus
+    state: hard
+
+- name: Movendo binario promtool
+  file:
+    src: "/opt/prometheus/promtool"
+    dest: "/usr/local/bin/promtool"
+    mode: "0777"
+    owner: prometheus
+    group: prometheus
+    state: hard

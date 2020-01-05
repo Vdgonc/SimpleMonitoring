@@ -1,0 +1,64 @@
+- name: Instalando dependencias Prometheus
+  apt:
+    name: ["wget", "tar", "git"]
+    state: latest
+    update_cache: yes
+
+- name: Criando grupo prometheus
+  group:
+    name: prometheus
+    state: present
+
+- name: Criando usuario prometheus
+  user:
+    name: prometheus
+    group: prometheus
+    shell: /bin/false
+    system: yes
+
+- name: Download Prometheus
+  get_url:
+    url: "https://github.com/prometheus/prometheus/releases/download/v2.15.1/prometheus-2.15.1.linux-amd64.tar.gz"
+    dest: "/opt/"
+    mode: "0755"
+    owner: prometheus
+    group: prometheus
+ 
+- name: Extraindo tar.gz prometheus
+  unarchive:
+    src: "/opt/prometheus-2.15.1.linux-amd64.tar.gz"
+    dest: "/opt/"
+    mode: "0755"
+    owner: prometheus
+    group: prometheus
+    remote_src: yes
+
+
+- name: Renomeando pasta prometheus
+  shell: "mv /opt/prometheus-2.15.1.linux-amd64 /opt/prometheus"
+
+- name: Criando diretorio /etc/prometheus
+  file:
+    path: /etc/prometheus
+    state: directory
+    mode: "0755"
+    owner: prometheus
+    group: prometheus
+
+
+- name: Criando diretorio /var/lib/prometheus
+  file:
+    path: /var/lib/prometheus
+    state: directory
+    mode: "0755"
+    owner: prometheus
+    group: prometheus
+
+
+- name: Criando diretorio /var/log/prometheus
+  file:
+    path: /var/log/prometheus
+    state: directory
+    mode: "0755"
+    owner: prometheus
+    group: prometheus
