@@ -15,7 +15,7 @@ With Node Exporter you can centralize the metrics in Prometheus, with Telegraf y
 
 After inserting the IP address in the host, execute the command in your terminal:
 
-​	`ansible-playbook -i hosts main.yml --key-file='you-key.pem'`
+​	`ansible-playbook -i hosts main.yml --key-file='your-key.pem'`
 
 ### Notes:
 
